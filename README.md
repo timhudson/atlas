@@ -41,19 +41,3 @@ module.exports.Query = {
 and then just run `npm start` and go to `http://localhost:3000`.
 
 Check out the [examples](./examples) for further details.
-
-# Configuration
-
-Configuration can be added to your `package.json` like this:
-
-``` js
-{
-  "atlas": {
-    "graphiql": false
-  }
-}
-```
-
-Available options are:
-
-- `graphiql`: Boolean
