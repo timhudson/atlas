@@ -6,12 +6,44 @@
   "bin": {
     "atlas": "./bin.js"
   },
+  "scripts": {
+    "test": "xo"
+  },
   "license": "MIT",
   "repository": "timhudson/atlas",
+  "xo": {
+    "space": true,
+    "semicolon": false,
+    "prettier": true,
+    "overrides": [
+      {
+        "files": "examples/**/schema/!(_*).js",
+        "rules": {
+          "unicorn/filename-case": [
+            "error",
+            {
+              "case": "pascalCase"
+            }
+          ]
+        }
+      },
+      {
+        "files": "examples/**/schema/_*.js",
+        "rules": {
+          "unicorn/filename-case": [
+            "off"
+          ]
+        }
+      }
+    ]
+  },
   "dependencies": {
     "globby": "^6.1.0",
     "graphql-yoga": "^1.14.0",
     "meow": "^3.7.0",
     "micro": "^7.3.3"
+  },
+  "devDependencies": {
+    "xo": "^0.21.1"
   }
 }
