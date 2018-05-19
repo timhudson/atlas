@@ -1,13 +1,15 @@
-# @segment/atlas
+# @timhudson/atlas
 
 > Atlas is a minimalistic framework for GraphQL servers
+
+### This is a temporary fork of [segmentio/atlas](https://github.com/segmentio/atlas)
 
 # How to use
 
 Install it:
 
 ```
-npm install @segment/atlas graphql
+npm install @timhudson/atlas graphql
 ```
 
 and add a script to your `package.json` like this:

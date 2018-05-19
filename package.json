@@ -1,5 +1,5 @@
 {
-  "name": "@segment/atlas",
+  "name": "@timhudson/atlas",
   "version": "0.3.0",
   "description": "Minimalistic framework for GraphQL servers",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "atlas": "./bin.js"
   },
   "license": "MIT",
-  "repository": "segmentio/atlas-tool",
+  "repository": "timhudson/atlas",
   "dependencies": {
     "globby": "^6.1.0",
     "graphql": "^0.9.6",
