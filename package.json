@@ -38,10 +38,9 @@
     ]
   },
   "dependencies": {
-    "globby": "^6.1.0",
+    "globby": "^8.0.1",
     "graphql-yoga": "^1.14.0",
-    "meow": "^3.7.0",
-    "micro": "^7.3.3"
+    "meow": "^3.7.0"
   },
   "devDependencies": {
     "xo": "^0.21.1"
