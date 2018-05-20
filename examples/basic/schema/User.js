@@ -6,6 +6,8 @@ module.exports.typeDef = `
   }
 `
 
-module.exports.User = {
-  posts: async (user, params, ctx) => ctx.getPosts(user.id)
+module.exports.resolvers = {
+  User: {
+    posts: async (user, params, ctx) => ctx.getPosts(user.id)
+  }
 }

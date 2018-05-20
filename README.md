@@ -33,8 +33,10 @@ module.exports.typeDef = `
   }
 `
 
-module.exports.Query = {
-  hello: async () => 'world'
+module.exports.resolvers {
+  Query: {
+    hello: async () => 'world'
+  }
 }
 ```
 

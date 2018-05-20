@@ -4,6 +4,8 @@ module.exports.typeDef = `
   }
 `
 
-module.exports.Query = {
-  posts: async (_, params, ctx) => ctx.getPosts()
+module.exports.resolvers = {
+  Query: {
+    posts: async (_, params, ctx) => ctx.getPosts()
+  }
 }

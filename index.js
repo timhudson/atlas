@@ -9,12 +9,11 @@ class Server {
   constructor({dir}) {
     this.dir = dir
     this.context = loadModule(`${this.dir}/_context.js`)
-    this.scalars = loadModule(`${this.dir}/_scalars.js`)
   }
 
   async getSchema() {
     return globby(`${this.dir}/!(_*).js`).then(paths => {
-      return parser(paths, this.scalars)
+      return parser(paths)
     })
   }
 
