@@ -3,7 +3,11 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "start": "atlas"
+    "dev": "atlas dev",
+    "start": "atlas start"
+  },
+  "atlas": {
+    "port": 8000
   },
   "dependencies": {
     "@timhudson/atlas": "latest",

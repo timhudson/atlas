@@ -3,7 +3,8 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "start": "atlas"
+    "dev": "atlas dev",
+    "start": "atlas start"
   },
   "dependencies": {
     "@timhudson/atlas": "latest",
