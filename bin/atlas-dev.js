@@ -4,6 +4,7 @@ const path = require('path')
 const meow = require('meow')
 const pkgConf = require('pkg-conf')
 const chokidar = require('chokidar')
+const clearModule = require('clear-module')
 const atlas = require('..')
 
 const conf = pkgConf.sync('atlas')
@@ -38,16 +39,24 @@ const cli = meow(
 let server
 
 const refresh = async () => {
-  if (server) await server.close()
-  server = atlas({dir, clearCache: true})
+  if (server && server.listening) await server.close()
+  server = atlas({dir})
   return server.start(cli.flags.port)
 }
 
-chokidar.watch('*.js', {cwd: dir, ignoreInitial: true}).on('all', () => {
-  refresh().then(() => {
-    console.log(`> Schema has been updated`)
+chokidar
+  .watch('*.js', {cwd: dir, ignoreInitial: true})
+  .on('all', (event, changedFilepath) => {
+    clearModule(path.resolve(dir, changedFilepath))
+
+    refresh()
+      .then(() => {
+        console.log(`> ${changedFilepath} has been updated`)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   })
-})
 
 refresh()
   .then(() => {
@@ -55,5 +64,4 @@ refresh()
   })
   .catch(err => {
     console.error(err)
-    process.nextTick(() => process.exit(1))
   })

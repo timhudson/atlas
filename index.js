@@ -7,21 +7,13 @@ const parser = require('./lib/parser')
 const loadModule = path => (existsSync(path) ? require(path) : undefined)
 
 class Server {
-  constructor({dir, clearCache = false}) {
+  constructor({dir}) {
     this.dir = dir
-    this.clearCache = clearCache
     this.context = loadModule(`${this.dir}/_context.js`)
   }
 
   async getSchema() {
-    return globby(`${this.dir}/!(_*).js`).then(paths => {
-      if (this.clearCache) {
-        for (const path of paths) {
-          delete require.cache[path]
-        }
-      }
-      return parser(paths)
-    })
+    return globby(`${this.dir}/!(_*).js`).then(paths => parser(paths))
   }
 
   async start(port) {
@@ -39,6 +31,10 @@ class Server {
   async close() {
     const {httpServer} = this
     return pify(httpServer.close.bind(httpServer))()
+  }
+
+  get listening() {
+    return this.httpServer.listening
   }
 }
 
