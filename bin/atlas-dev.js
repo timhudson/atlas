@@ -3,6 +3,7 @@
 const path = require('path')
 const meow = require('meow')
 const pkgConf = require('pkg-conf')
+const chokidar = require('chokidar')
 const atlas = require('..')
 
 const conf = pkgConf.sync('atlas')
@@ -34,9 +35,22 @@ const cli = meow(
   }
 )
 
-atlas({dir})
-  .start(cli.flags.port)
-  .then(async () => {
+let server
+
+const refresh = async () => {
+  if (server) await server.close()
+  server = atlas({dir, clearCache: true})
+  return server.start(cli.flags.port)
+}
+
+chokidar.watch('*.js', {cwd: dir, ignoreInitial: true}).on('all', () => {
+  refresh().then(() => {
+    console.log(`> Schema has been updated`)
+  })
+})
+
+refresh()
+  .then(() => {
     console.log(`> Ready on http://localhost:${port}`)
   })
   .catch(err => {
