@@ -1,6 +1,6 @@
 {
   "name": "@timhudson/atlas",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Minimalistic framework for GraphQL servers",
   "main": "index.js",
   "bin": {
