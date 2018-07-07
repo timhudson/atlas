@@ -38,11 +38,11 @@
     ]
   },
   "dependencies": {
+    "apollo-server": "^2.0.0-rc.6",
     "chokidar": "^2.0.3",
     "clear-module": "^2.1.0",
     "execa": "^0.10.0",
     "globby": "^8.0.1",
-    "graphql-yoga": "^1.14.0",
     "lodash.merge": "^4.6.1",
     "meow": "^5.0.0",
     "pify": "^3.0.0",

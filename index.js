@@ -1,14 +1,15 @@
 const {existsSync} = require('fs')
 const globby = require('globby')
-const {GraphQLServer} = require('graphql-yoga')
+const {ApolloServer, gql} = require('apollo-server')
 const pify = require('pify')
 const parser = require('./lib/parser')
 
 const loadModule = path => (existsSync(path) ? require(path) : undefined)
 
 class Server {
-  constructor({dir}) {
+  constructor({dir, ...options}) {
     this.dir = dir
+    this.options = options
     this.context = loadModule(`${this.dir}/_context.js`)
   }
 
@@ -18,26 +19,30 @@ class Server {
 
   async start(port) {
     const {typeDefs, resolvers} = await this.getSchema()
-    this.server = new GraphQLServer({
+    this.server = new ApolloServer({
+      ...this.options,
       typeDefs,
       resolvers,
       context: this.context
     })
-    this.httpServer = await this.server.start({port})
 
-    return this.httpServer
+    await this.server.listen({port})
+
+    return this.server.httpServer
   }
 
   async close() {
-    const {httpServer} = this
+    const {httpServer} = this.server
     return pify(httpServer.close.bind(httpServer))()
   }
 
   get listening() {
-    return this.httpServer.listening
+    return this.server.httpServer.listening
   }
 }
 
 module.exports = options => {
   return new Server(options)
 }
+
+module.exports.gql = gql

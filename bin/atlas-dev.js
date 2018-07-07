@@ -40,7 +40,7 @@ let server
 
 const refresh = async () => {
   if (server && server.listening) await server.close()
-  server = atlas({dir})
+  server = atlas({dir, tracing: true})
   return server.start(cli.flags.port)
 }
 
