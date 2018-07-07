@@ -1,4 +1,4 @@
-const { gql } = require('@timhudson/atlas')
+const {gql} = require('@timhudson/atlas')
 
 module.exports.typeDef = gql`
   type User {
